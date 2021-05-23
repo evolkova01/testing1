@@ -8,7 +8,7 @@ addons:
   sonarcloud:
     organization: "evolkova01"
     token:
-      secure:"STEgqpwUeQjEUsqnXFg+SB30QBKTmFt1xvNxZw2pL0DFtfg52PjXyDdRY4pezLX5jMFvSCK7KWJvJHJBwkZSshfIdpIigldi7sVvRRunjX1ik7GyFQZSRoVPgGsrCIqhje2GbMw++9sSBI8Jy7lhrazluFqoQfumaTK+urlj/j/cW9lDwX9lxAEnlrRyZ3c4DcFI65QZjaug0QzpXn/ZE7GOjLntT6yXwIhYZkskQXm1r5cGbBN9geyVer4SM/XlVg0VxB3BSiuXb13l6hETHWq1YDvaNS7SiVNAZyZjAh4hpY9ZeVySaSC84zb0htQxxs33MK2bvPO3lE6tXr2Ir9o/+N3XHoFXihbcvBIHIXzkRdJUcLXslzey262nTfKSsvv3d9tmzdYF5zxzvcSQAo8RDgQs3HbFv/Ur6pzx1Dwb7dzaAVTRkp6ZtKmgyQp2pyHo8hNdfDn0MaCZtT6G+3HedLF4dDHF5fno7/dQbKbwdCfNJV7MWlwBsLbYfVK9ktOO8gEm82WYGWJNSgO6UWtbum5yzUKFsMrQLRJmpGvlmGWm1jNnT9Ka1KAAAntchOBRlgXhX8PyUK6tRnuE8sD2AT8ljafiJQURS3Q0ovsi1axx+JQJGF3bDxQIyvcFF8HCgNnOrC4d50vdd1Pf3EBRghm1YscMLPZasDr+W6E="  
+      secure: "STEgqpwUeQjEUsqnXFg+SB30QBKTmFt1xvNxZw2pL0DFtfg52PjXyDdRY4pezLX5jMFvSCK7KWJvJHJBwkZSshfIdpIigldi7sVvRRunjX1ik7GyFQZSRoVPgGsrCIqhje2GbMw++9sSBI8Jy7lhrazluFqoQfumaTK+urlj/j/cW9lDwX9lxAEnlrRyZ3c4DcFI65QZjaug0QzpXn/ZE7GOjLntT6yXwIhYZkskQXm1r5cGbBN9geyVer4SM/XlVg0VxB3BSiuXb13l6hETHWq1YDvaNS7SiVNAZyZjAh4hpY9ZeVySaSC84zb0htQxxs33MK2bvPO3lE6tXr2Ir9o/+N3XHoFXihbcvBIHIXzkRdJUcLXslzey262nTfKSsvv3d9tmzdYF5zxzvcSQAo8RDgQs3HbFv/Ur6pzx1Dwb7dzaAVTRkp6ZtKmgyQp2pyHo8hNdfDn0MaCZtT6G+3HedLF4dDHF5fno7/dQbKbwdCfNJV7MWlwBsLbYfVK9ktOO8gEm82WYGWJNSgO6UWtbum5yzUKFsMrQLRJmpGvlmGWm1jNnT9Ka1KAAAntchOBRlgXhX8PyUK6tRnuE8sD2AT8ljafiJQURS3Q0ovsi1axx+JQJGF3bDxQIyvcFF8HCgNnOrC4d50vdd1Pf3EBRghm1YscMLPZasDr+W6E="  
 
 script:
   - qmake
@@ -19,6 +19,11 @@ after_success:
   - coveralls --root . -E ".*external.*" -E ".*tests.*"
   - build-wrapper-linux-x86-64 --out-dir bw-output make clean all
   - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+  
+cache:
+  directories:
+  - '$HOME/.m2/repository'
+  - '$HOME/.sonar/cache'  
 
 notifications:
   email: false
