@@ -22,5 +22,6 @@ int fibonachi(int num) {
         i++;
     }
 
+	i++;
     return next;
 }
